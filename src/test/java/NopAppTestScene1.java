@@ -3,6 +3,10 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -45,7 +49,13 @@ public class NopAppTestScene1 {
         }
     }
 
+    @Epic("Nop Ecommerce App") // Represents a high-level category
+    @Feature("Feature Automation") // Represents a feature within the epic
+
+
     @Test
+    @Story("Splash Screen")
+    @Description(value = "Splash Screen Functionality")
     public void click_Agreement_Button() {
 
 
@@ -60,6 +70,8 @@ public class NopAppTestScene1 {
     }
 
     @Test(dependsOnMethods = "click_Agreement_Button")
+    @Story("Our Categories")
+    @Description(value = "Product Selection Activity")
     public void clickElectronics() throws InterruptedException {
 
 
