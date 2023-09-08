@@ -4,6 +4,10 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -54,8 +58,13 @@ public class NopAppTestScene2 {
             e.printStackTrace();
         }
     }
+    @Epic("Nop Ecommerce App") // Represents a high-level category
+    @Feature("Feature Automation") // Represents a feature within the epic
+
 
     @Test
+    @Story("Splash Screen")
+    @Description(value = "Splash Screen Functionality")
     public void click_Agreement_Button() {
 
 
@@ -70,6 +79,8 @@ public class NopAppTestScene2 {
     }
 
     @Test(dependsOnMethods = "click_Agreement_Button")
+    @Story("Our Categories")
+    @Description(value = "Product Selection Activity")
     public void clickElectronics() throws InterruptedException {
 
 
@@ -148,6 +159,8 @@ public class NopAppTestScene2 {
     }
 
     @Test(dependsOnMethods = "clickElectronics")
+    @Story("Checkout Page")
+    @Description(value = "Guest Checkout Activity")
     public void checkOutActivity() throws InterruptedException {
 
         switchToActivity("com.nopstation.nopcommerce.nopstationcart", "com.bs.ecommerce.checkout.WebViewPaymentActivity");
@@ -159,15 +172,14 @@ public class NopAppTestScene2 {
 
         try {
 
-            // Load the Excel file using Apache POI
+
             FileInputStream fis = new FileInputStream("C:\\Users\\hasan\\Downloads\\billingData.xlsx");
             Workbook workbook = new XSSFWorkbook(fis);
 
-            // Assuming you have the data in the first row of the first sheet
+
             Sheet sheet = workbook.getSheetAt(0);
             Row row = sheet.getRow(0);
 
-            // Retrieve billing address data from Excel (you can use Apache POI here)
             String firstName = row.getCell(0).getStringCellValue();
             String lasttName = row.getCell(1).getStringCellValue();
             String email = row.getCell(2).getStringCellValue();
@@ -182,10 +194,6 @@ public class NopAppTestScene2 {
 
 
 
-            // Navigate to the screen where you want to input the data
-            // (You might need to add code to reach this screen)
-
-            // Input data into text boxes and dropdown field
             WebElement relativeLayoutCheckout = driver.findElement(By.id("com.nopstation.nopcommerce.nopstationcart:id/layoutCheckoutAddress"));
 
             WebElement name1Input = relativeLayoutCheckout.findElement(By.id("com.nopstation.nopcommerce.nopstationcart:id/etFirstName"));
@@ -206,14 +214,13 @@ public class NopAppTestScene2 {
             companyInput.sendKeys(company);
 
 
-            // Click the dropdown to open it (assuming it's a click-to-open dropdown)
             Duration implicitWaitTimeout = Duration.ofSeconds(10);
             WebDriverWait wait = new WebDriverWait(driver, implicitWaitTimeout);
             WebElement countryDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.nopstation.nopcommerce.nopstationcart:id/countrySpinner")));
 
             countryDropdown.click();
 
-            // Select the state from the dropdown (assuming it's a list-based dropdown)
+
             Thread.sleep(3000);
 
             scrollDown((AndroidDriver) driver);
@@ -240,7 +247,6 @@ public class NopAppTestScene2 {
 
             phoneInput.sendKeys(phone);
             faxInput.sendKeys(fax);
-            // Submit the form or perform other actions as needed
 
         } catch (IOException e) {
             e.printStackTrace();
